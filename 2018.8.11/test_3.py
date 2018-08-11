@@ -20,7 +20,7 @@ import random
     #num        输入的数字
     #change     剩余的机会数
     #sjs        答案随机数
-    #sjsc       机会随机数
+    #sjsc       机会随机数1
 
 #消息模块
 class Msg():
