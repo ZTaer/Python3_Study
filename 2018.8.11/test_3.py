@@ -56,6 +56,7 @@ def ssjs():
 def ssjsc():
     return random.randint(2, 5)
 
+#主程序
 if __name__ == "__main__":
     sjsc = ssjsc()
     change = sjsc
