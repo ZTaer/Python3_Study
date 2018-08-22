@@ -1,0 +1,53 @@
+0. 我们根据列表、元组和字符串的共同特点，把它们三统称为什么
+    1）都可以通过索引得到每一个元素
+    2）默认索引值总是从0开始（当然灵活的Python还支持负数索引）
+    3）可以通过分片的方法得到一个范围内的元素的集合
+    4）有很多共同的操作符（重复操作符、拼接操作符、成员关系操作符）
+
+1. 请问分别使用什么BIF，可以把一个可迭代对象转换为列表、元组和字符串？
+    转换成列表list()
+    转换成元组zip(),enumerate()
+    tuple([iterable]) 把可迭代对象转换为元组
+    转换成字符串 '%s' % asd ; str()
+
+2. 你还能复述出“迭代”的概念吗？
+    迭代是重复反馈过程的活动，其目的通常是为了接近并到达所需的目标或结果。每一次对过程的重复被称为一次“迭代”，而每一次迭代得到的结果会被用来作为下一次迭代的初始值。
+
+
+3. 你认为调用 max('I love FishC.com') 会返回什么值？为什么
+    返回v,因为v的Asc码比较大
+    max()在比较的是字母的Ascaii码
+
+4.
+    if __name__ == "__main__":
+    name = input('请输入用户名: ')
+    score = [['迷途',85],['黑色',99],['SB',0]]
+    pass1 = False
+    for each in score:
+        if each[0] == name:
+            print (name + '得分: ',each[1],'分')
+            pass1 = True
+            break
+    if not pass1:
+        print("无此用户")
+
+0. 猜想一下 min() 这个BIF的实现过程
+    def min3(list): # # min()正解
+    if len(list) == 1:
+        return list[0]
+    else:
+        each = list[0]
+        for i in list:
+            if each < i:
+                continue
+            elif each > i:
+                each = i # 核心
+        return each
+
+视频中我们说 sum() 这个BIF有个缺陷，就是如果参数里有字符串类型的话就会报错，请写出一个新的实现过程，自动“无视”参数里的字符串并返回正确的计算结果
+    def sum2(list):
+    he = 0
+    for i in list:
+        if not isinstance(i,str):
+            he = he + i
+    return he
