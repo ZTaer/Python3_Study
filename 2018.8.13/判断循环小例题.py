@@ -32,3 +32,5 @@ if __name__ == "__main__":
         else:
             print ( check_socre(input_score) )
             break
+
+            
