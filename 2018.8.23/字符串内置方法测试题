@@ -1,0 +1,25 @@
+0. 还记得如何定义一个跨越多行的字符串吗（请至少写出两种实现的方法）？
+    1. print ('as\ndasd')
+    2. print ('aaaaa')
+       print('asdasd')
+
+1. 三引号字符串通常我们用于做什么使用？
+    多行注释
+
+2. file1 = open('C:\windows\temp\readme.txt', 'r') 表示以只读方式打开“C:\windows\temp\readme.txt”这个文本文件，但事实上这个语句会报错，知道为什么吗？你会如何修改？
+    我的普通方法: ' C:\\windows\\temp\\readme.txt '
+    简洁方法没有想起来!
+
+3. 有字符串：str1 = '<a href="http://www.fishc.com/dvd" target="_blank">鱼C资源打包</a>'，请问如何提取出子字符串：'www.fishc.com'
+    切片的方法:
+        str2 = str1[16:29]
+
+4. 如果使用负数作为索引值进行分片操作，按照第三题的要求你能够正确目测出结果吗？
+        str3 = str1[-35:-22]
+
+5. 还是第三题那个字符串，请问下边语句会显示什么内容？str1[20:-36]
+    什么都不会显示
+
+6. str1 = 'i2sl54ovvvb4e3bferi32s56h;$c43.sfc67o0cm99'
+    解密失败
+
