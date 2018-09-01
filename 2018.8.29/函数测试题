@@ -1,0 +1,63 @@
+0. 你有听说过DRY吗？
+    没有
+
+1. 都是重复一段代码，为什么我要使用函数（而不使用简单的拷贝黏贴）呢？
+    函数更加灵活方便
+
+2. 函数可以有多个参数吗？
+    当然
+    比如:
+        def test(name='空',*score):
+            print(name,':'*score)
+
+        if __main__ = '__name__':
+            test(name='abc',1,2,3,4)
+
+3. 创建函数使用什么关键字，要注意什么？
+    def test(name='a'):
+        print('xxx')
+        return xx
+    最好给参数一个默认值,防止发生错误
+
+4. 请问这个函数有多少个参数？
+    def MyFun((x, y), (a, b)):
+    return x * y - a * b
+
+    格式错误
+
+5. 请问调用以下这个函数会打印什么内容？
+    >>> def hello():
+        print('Hello World!')
+        return
+        print('Welcome To FishC.com!')
+
+    打印"Hello World!"
+    因为return后不会在执行函数内容
+
+0. 编写一个函数power()模拟内建函数pow()，即power(x, y)为计算并返回x的y次幂的值。
+    # 模拟pow()函数
+    # 分析一下pow(), pow(2,2) == 2**2 结果为4
+    def power(num=0,p=1):
+    return num**p
+
+2. 编写一个将十进制转换为二进制的函数，要求采用“除2取余”（脑补链接）的方式，结果与调用bin()一样返回字符串形式。
+    def binn( numint ):
+    listbin = []
+    endbin = '0b'
+    nagative = False
+    if numint < 0:
+        nagative = True
+    while True:
+        end = int(numint / 2)
+        r = numint % 2
+        listbin.append(str(r))
+        numint = end
+        if numint == 0:
+            for i in list(reversed(listbin)):
+                endbin +=i
+            if nagative:
+                return '-'+endbin
+            else:
+                return endbin
+            break
+

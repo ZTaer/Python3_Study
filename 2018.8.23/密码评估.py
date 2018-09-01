@@ -80,9 +80,7 @@ class Check():
 
     # 密码长度检测
     def check_len(self):
-        return len(self.password)
-
-
+        return len(self.pas)
 
 class Msg():
     def __init__(self,check_msg):
@@ -99,8 +97,6 @@ class Msg():
               '1.密码必须有数字,字母,特殊符号三种组合\n\t' +
                 '2.密码只能由字母开头\n\t' +
               '3.密码长度不能低于16位')
-
-
 
 if __name__ == "__main__":
     password = password()
