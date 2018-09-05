@@ -36,7 +36,6 @@ def findstr(inputstr,aims):
                         sufltEqual += 1
         return sufltEqual
 
-
 if __name__ == "__main__":
         inputstr = input("请输入目标字符串: ")
         aims = input("查找: ")

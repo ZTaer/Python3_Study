@@ -1,0 +1,133 @@
+0. 下边程序会输入什么？
+	def next():
+		print('我在next()函数里...')
+		pre()
+
+	def pre():
+		print('我在pre()函数里...')
+		
+	next()
+	会报错！
+
+1. 请问以下这个函数有返回值吗？
+	>>> def hello():
+        print('Hello FishC!')
+
+	错误: 有,会打印出" Hello FishC! "
+	正确: 会返回一个None对象
+
+2. 请问Python的return语句可以返回多个不同类型的值吗？
+	可以的
+
+3. 目测以下程序会打印什么内容：
+	def fun(var):
+    var = 1314
+    print(var, end='')
+
+	var = 520
+	fun(var)
+	print(var)
+	
+1314520
+
+4. 目测以下程序会打印什么内容？
+var = ' Hi '
+
+def fun1():
+    global var
+    var = ' Baby '
+    return fun2(var)
+
+def fun2(var):
+    var += 'I love you' # 此时为" Baby I love you "
+    fun3(var) # 无法改变var值
+    return var
+
+def fun3(var):
+    var = ' 小甲鱼 '
+
+print(fun1())
+
+Baby I love you
+0. 编写一个函数，判断传入的字符串参数是否为“回文联”（回文联即用回文形式写成的对联，既可顺读，也可倒读。例如：上海自来水来自海上）
+def count( countstr ):
+    end = False
+    def reversestr( x ):
+        return x[::-1]
+    if len( countstr ) % 2 == 0:
+        if countstr[ : len( countstr )//2 ] == countstr[ len(countstr)//2:][::-1]:
+            end = True
+    elif len( countstr ) % 2 ==1:
+        if countstr[:len(countstr)//2] == countstr[ len(countstr)//2+1:][::-1]:
+            end = True
+    return end
+
+if __name__=="__main__":
+    if count( input("请输入: ") ) :
+        print("是回文联!")
+    else:
+        print("不是回文联!")
+
+另一种方法:
+
+def palindrome(string):
+    list1 = list(string)
+    list2 = reversed(list1)
+    if list1 == list(list2):
+        return '是回文联!'
+    else:
+        return '不是回文联！'
+print(palindrome('上海自来水来自海上'))
+
+1. 编写一个函数，分别统计出传入字符串参数（可能不只一个参数）的英文字母、空格、数字和其它字符的个数。
+	def count(*inputstr):
+    for i in inputstr:
+        def check_num():
+            nonlocal i
+            pattern = re.compile('[0-9]')
+            return len(pattern.findall( i ))
+
+        def check_az():
+            nonlocal i
+            pattern = re.compile('[a-zA-Z]')
+            return len(pattern.findall( i ))
+
+        def check_space():
+            nonlocal i
+            pattern = re.compile(' ')
+            return len(pattern.findall( i ))
+        
+        other_num = len(i) - check_num() - check_az() - check_space()
+        print("数字: ",check_num(),"字母: ",check_az(),"空格: ",check_space(),"其他: ",other_num)
+
+    
+
+if __name__=="__main__":
+    count('sadasd234234','sadasd(^&*^')
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+0. 如果希望在函数中修改全局变量的值，应该使用什么关键字？
+	golobal
+1. 在嵌套的函数中，如果希望在内部函数修改外部函数的局部变量，应该使用什么关键字？
+	nonlocal
+2. Python 的函数可以嵌套，但要注意访问的作用域问题哦，请问以下代码存在什么问题呢？
+	def outside():
+		print('I am outside!')
+		def inside():
+			print('I am inside!')
+	inside()
+	无法执行函数inside()
+	如下修改可以执行
+	def outside():
+		print('I am outside!')
+		def inside():
+			print('I am inside!')
+		inside()
+3. 请问为什么代码 A 没有报错，但代码 B 却报错了？应该如何修改？
+def outside():
+    var = 5
+    def inside():
+		nonlocal var
+        print(var)
+        var = 3
+        
+    inside()
+outside()
+4. 请问如何访问 funIn() 呢？
+def funOut():
+    def funIn():
+        print('宾果！你成功访问到我啦！')
+    return funIn()
+funOut()
+6. 以下是“闭包”的一个例子，请你目测下会打印什么内容？
+def funX():
+    x = 5
+    def funY():
+        nonlocal x
+        x += 1
+        return x
+    return funY
+
+a = funX()
+print(a())
+print(a())
+print(a())
+
+会报错,因为return funY错误应该: return funY()
+
+0. 请用已学过的知识编写程序，统计下边这个长字符串中各个字符出现的次数并找到小甲鱼送给大家的一句话。
+def count(content):
+    strnum = '!@#$%^&*()_+[]{}'
+    
+    for i in strnum:
+        s = 0
+        for y in content:
+            if i == y:
+                s += 1
+        print(i,' = ',s)
+结果：
+!  =  6079
+@  =  6157
+#  =  6115
+$  =  6046
+%  =  6104
+^  =  6030
+&  =  6043
+*  =  6034
+(  =  6154
+)  =  6186
+_  =  6112
++  =  6066
+[  =  6108
+]  =  6152
+{  =  6046
+}  =  6105
+1. 请用已学过的知识编写程序，找出小甲鱼藏在下边这个长字符串中的密码，密码的埋藏点符合以下规律：
+
