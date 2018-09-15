@@ -1,0 +1,96 @@
+0. Python的字典是否支持一键（Key）多值（Value）？
+不支持
+1. 在字典中，如果试图为一个不存在的键（Key）赋值会怎样？
+创建新键
+2. 成员资格操作符（in和not in）可以检查一个元素是否存在序列中，当然也可以用来检查一个键（Key）是否存在字典中，那么请问哪种的检查效率更高些？为什么？
+答：在字典中检查键（Key）是否存在比在序列中检查指定元素是否存在更高效。因为字典的原理是使用哈希算法存储，一步到位，不需要使用查找算法进行匹配，因此时间复杂度是O（1），效率非常高。（关于如何使用哈希算法存储的具体原理可以参考第3题的“扩展阅读”部分）
+3. Python对键（Key）和值（Value）有没有类型限制？
+没有
+4. 请目测下边代码执行后，字典dict1的内容是什么？
+>>> dict1.fromkeys((1, 2, 3), ('one', 'two', 'three')) 
+>>> dict1.fromkeys((1, 3), '数字')
+
+dict1 = { 1:('one', 'two', 'three'), 2:('one', 'two', 'three'),3:('one', 'two', 'three')}
+dict2 = {1:'数字',2:'数字'}
+5. 如果你需要将字典dict1 = {1: 'one', 2: 'two', 3: 'three'}拷贝到dict2，你应该怎么做？
+dict2 = dict1.copy()
+0. 尝试编写一个用户登录程序（这次尝试将功能封装成函数），程序实现如图：
+import sys
+def user_index(order = 0):
+    
+    #   检测核心
+    check_user = lambda user : 1 if user in userdict else 0
+    check_password = lambda user , password : 1 if password == userdict[user] else 0
+    #   用户加入字典核心
+    def main_join( user, password ):
+        userdict[ user ] = password
+
+    #   注册界面
+    def user_sin():
+        user = input("用户名: ")
+        while check_user( user ):
+            user = input("已存在请重新输入: ")
+        password = input("密码: ")
+        main_join( user , password )
+        print("成功注册!\n赶紧去尝试登录吧:D\n")
+        user_index()
+
+    #   登录界面
+    def user_login():
+        user = input("用户名: ")
+        while not check_user( user ):
+            user = input("用户名不存在\n请重新输入: ")
+        password = input("密码: ")
+        i = 0
+        while not check_password(user , password) and i < 3:
+            password = input("密码错误请重新输入: ")
+            i+=1
+        if check_password( user , password ):
+            print("登录成功\n欢迎进入HackerSystem2.318( 点击右上角结束程序 )")
+        else:
+            print( "登录失败!" )
+            
+
+    #   主界面
+    print('|--- 新建用户: N / n ---|')
+    print('|--- 登录账号: E / e ---|')
+    print('|--- 退出程序: Q / q ---|')
+    while  not order:
+        order = input("请输入指令: ")
+    order = str(order).lower() # 格式化命令
+    if order == 'n' :
+        user_sin() # 进入注册界面
+    elif order == 'e':
+        user_login() # 进入登录界面
+    elif order == 'q': # 退出程序
+        try:
+            sys.exit()
+        except:
+            print("程序结束!\n")
+        
+
+if __name__ == "__main__":
+    userdict = {'ztaer':'123456','zhao':'666666'}
+    user_index()
+	
+	
+	
+--------------------------------分割线-------------------------------
+0. 请问集合的唯一作用是什么呢？
+答：集合几乎所有的作用就是确保里边包含的元素的唯一性，就像世界上没有两片完全相同的树叶一样，集合内不可能存在两个相同的元素！
+1. 如果你希望创建的集合是不变的，应该怎么做？
+frozenset()
+2. 请问如何确定一个集合里边有多少个元素？
+用len()函数
+3. 请目测以下代码会打印什么内容？
+>>> num_set = set([1, 2, 3, 4, 5])
+>>> num_set[0]
+会报错
+4.4. 请问 set1 = {[1, 2]} 和 set1 = set([1, 2]) 执行的结果一样吗？
+不一样，第一个报错，第二个set1 = { 1,2 }
+5. 打开你的IDLE，输入set1 = {1, 1.0}，你发现了什么？
+set1 = {1 }
+6. 请问如何给集合添加和删除元素？
+set1 = {1,2}
+set1.add(3) #添加元素
+set1.remove(1) #删除元素
