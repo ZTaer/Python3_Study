@@ -44,5 +44,6 @@ def chatCategory( chatfile ):
 if __name__ == "__main__":
     chat_file = open('E:\\Study\\Python3\\Python3_Study\\2018.9.14\\对话拆接\\对话.txt','at+',encoding='utf-8')
     chatCategory(chat_file)
+    chat_file.close()
 
 
