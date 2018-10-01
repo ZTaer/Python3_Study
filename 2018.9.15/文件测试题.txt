@@ -1,0 +1,189 @@
+0. 编写一个程序，接受用户的输入并保存为新的文件，程序实现如图：
+def content( file ):
+    contentlist=[] # 创建存储内容的列表
+    print("请输入存储内容: ")
+    for each in iter(input, ':w'): # 循环input,如果检测到:w则停止循环
+        contentlist.append(each+'\n') # 每一行输入末尾加入换行符号,并加入列表中
+    file.writelines( contentlist ) 
+        
+if __name__ == "__main__":
+    name = input("新建文件名: ")
+    file = open('D:%s' % name , 'at+', encoding='utf-8')
+    content(file)
+    file.close()
+	
+1. 编写一个程序，比较用户输入的两个文件，如果不同，显示出所有不同处的行号与第一个不同字符的位置，程序实现如图：
+
+
+def compared(file1,file2):
+    noequal = []
+    count = 0
+    file1.seek(0,0)
+    file2.seek(0,0)
+    f2 = iter(file2)
+    for each in file1:
+        count +=1
+        if each != next(f2):
+            noequal.append(count) # 记录不同处行数位置
+    return noequal
+
+if __name__ == "__main__":
+    #   打开并验证文件是否正常
+    print("请输入对比文件名!")
+    while True:
+        name1 = input("A文件名: ")
+        name2 = input("B文件名: ")
+        try:
+            file1 = open('%s' % name1, 'rt')
+            file2 = open('%s' % name2, 'rt')
+            break
+        except:
+            print("文件不存在请重新输入!")
+
+    #   比较处理
+    noequal = compared(file1,file2) # 返回一个列表
+
+    #   输出结果
+    print("共有%s处不同" % len(noequal))
+    for i in noequal:
+        print("第 %s 行不同" % i)
+    test(file1)
+    file1.close()
+    file2.close()
+	
+	2. 编写一个程序，当用户输入文件名和行数（N）后，将该文件的前N行内容打印到屏幕上，程序实现如图：
+	3. 呃，不得不说我们的用户变得越来越刁钻了。要求在上一题的基础上扩展，用户可以随意输入需要显示的行数。（如输入13:21打印第13行到第21行，输入:21打印前21行，输入21:则打印从第21行开始到文件结尾所有内容）
+	2与3共存
+	
+	
+def fontformart( line , content ): #    格式化line值
+    if line.find(':') < 0: #    没有":"情况下
+        line = int(line)
+        while line < 0 or line > len(content): # 保证没有负数,且不大于content元素数量
+            line = -line if line < 0 else line
+            line = len(content) if line > len(content) else line
+        return line
+    elif line.find(':') >= 0 : #    有":"情况下
+        xylist = line.split(':')
+        while xylist[0] == '' or xylist[1] == '': #  保证没有空字符串
+            xylist[0] = 0 if xylist[0] == '' else int( xylist[0] )
+            xylist[1] = len(content) + 1 if xylist[1] == '' else int( xylist[1] )
+        return xylist
+        
+def fileInfo( road , line): #   主要功能函数
+    #   #   文件路径验证
+    while True:
+        try:
+            file = open('%s' % road , 'rt',encoding='utf-8')
+            file.seek(0,0)
+            print("<<<---打开文件成功--->>>\n")
+            break
+        except:
+            print("文件不存在!")
+            road = input("请重新输入: ")
+    #   准备核心
+    content = []
+    for each in file:
+        content.append( each )
+    it = iter( content )
+    #   行动核心
+    if line.find(':') < 0 : #   line没有":"情况下
+        line = fontformart( line , content ) #  格式化line值,保证没有负数,且不大于content元素数量
+        for i in range( line ):
+            print( next(it),end='' )
+        print('\n<<<---     END      --->>>')
+    else: # line有":"情况下
+        line = fontformart( line , content ) #  格式化line值,保证没有空字符串
+        for each1 in content[ line[0] : line[1] ]: # 列表的切片特性,迭代出元素
+            print( each1,end='')
+        print('\n<<<---     END      --->>>')
+    
+    
+if __name__ == "__main__":
+    road = input("目录文件: ")
+    line = input("显示几行: ")
+    fileInfo(road , line) #   主要功能函数
+	
+	4. 编写一个程序，实现“全部替换”功能，程序实现如图：
+	小甲鱼用的replace方法,我用的split()方法
+	
+	def intonum( num ):
+    intolist = []
+    count = 1
+    for i in range( num-1 ):
+        intolist.append(count)
+        count+=2
+    return intolist
+
+def mainReplace( line , otext , etext ):
+    linelist = line.split(otext)
+    result = ''
+    for each in intonum( len(linelist) ):
+        linelist.insert( each , etext )
+    for i in linelist:
+        result += i
+    return result
+
+def fontReplace( name , otext , etext):
+    while True:
+        try:
+            file = open( '%s' % name , 'rt', encoding='utf-8' )
+            file.seek(0,0)
+            break
+        except:
+            print("文件不存在 ! ")
+            name = input("重新输入: ")
+    content = []
+    count = 1
+    for each in file:
+        content.append(each)
+    file.close()
+    for line in content:
+        line_new = mainReplace( line , otext , etext )
+        if count == 1:
+            file = open( '%s' % name , 'wt+', encoding='utf-8' )
+            file.seek(0,0)
+            file.write(line_new)
+            file.close()
+        else:
+            file = open( '%s' % name , 'at+', encoding='utf-8' )
+            file.seek(0,0)
+            file.write(line_new)
+        count+=1
+    file.close()
+
+def findnum( name,otext ):
+    while True:
+        try:
+            file = open( '%s' % name , 'rt', encoding='utf-8' )
+            file.seek(0,0)
+            break
+        except:
+            print("文件不存在 ! ")
+            name = input("重新输入: ")
+    result = len(file.read().split(otext)) - 1
+    return result
+    
+
+if __name__ == "__main__":
+    name = input("文件名: ")
+    otext = input("修改值: ")
+    etext = input("修改为: ")
+    num = findnum( name,otext )
+    print( "文件%s中共有%s个[ %s ]" % (name , num , otext) )
+    print( "你确定将全部[ %s ]替换成[ %s ]吗?" % (otext , etext) )
+    while True:
+        chose = input("YES/NO: ").lower()
+        if chose == 'yes':
+            fontReplace(name , otext , etext)
+            print("修改成功!")
+            break
+        elif chose == 'no':
+            print("取消修改!")
+            break
+        else:
+            print("输入有误,请重新输入!")
+	
+	
+	
+	

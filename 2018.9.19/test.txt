@@ -1,0 +1,13 @@
+0. 编写一个程序，接受用户的输入并保存为新的文件，程序实现如图：
+de(-) content( (-)ile ):
+    contentlist=[] # 创建存储内容的列表
+    print("请输入存储内容: ")
+    (-)or each in iter(input, ':w'): # 循环input,如果检测到:w则停止循环
+        contentlist.append(each+'\n') # 每一行输入末尾加入换行符号,并加入列表中
+    (-)ile.writelines( contentlist ) 
+        
+i(-) __name__ == "__main__":
+    name = input("新建文件名: ")
+    (-)ile = open('D:%s' % name , 'at+', encoding='ut(-)-8')
+    content((-)ile)
+    (-)ile.close()
