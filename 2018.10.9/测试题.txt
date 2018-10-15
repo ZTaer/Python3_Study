@@ -1,0 +1,60 @@
+0. 结合你自身的编程经验，总结下异常处理机制的重要性？
+
+前几节课，在学习OS模块时，用os函数操作文件，有时删除一个文件，或者访问C盘的系统目录，它们
+都需要管理员权限才能访问，所以OS会保错导致程序不能完整的运行下去，所以使用异常处理非常重要，在获取
+文件目录时，使用异常处理对于不能访问的目录可以直接绕过，保证程序完整的执行。
+
+1. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称： 
+>>> my_list = [1, 2, 3, 4,,]
+会的，SyntaxError	Python的语法错误
+
+2. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：
+>>> my_list = [1, 2, 3, 4, 5]
+>>> print(my_list[len(my_list)])
+IndexError	索引超出序列的范围
+
+3. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：
+>>> my_list = [3, 5, 1, 4, 2]
+>>> my_list.sorted()
+sorted用法不正确
+AttributeError尝试访问未知的对象属性
+
+4. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：y
+>>> my_dict = {'host': 'http://bbs.fishc.com', 'port': '80'}
+>>> print(my_dict['server'])
+KeyError	字典中查找一个不存在的关键字
+
+5. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：
+def my_fun(x, y):
+        print(x, y)
+
+my_fun(x=1, 2)
+SyntaxError	Python的语法错误
+如果是>>> test(x=1,y=2)
+就不会出现错误
+
+6. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：
+
+f = open('C:\\test.txt', wb) # 错误，SyntaxError	Python语法错误
+f.write('I love FishC.com!\n')
+f.close()
+
+7. 请问以下代码是否会产生异常，如果会的话，请写出异常的名称：
+def my_fun1():
+        x = 5
+        def my_fun2():
+                x *= x
+                return x
+        return my_fun2()
+
+my_fun1()
+UnboundLocalError:因为x变量不存在于my_fun2中
+
+
+
+
+
+
+
+
+

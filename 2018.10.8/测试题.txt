@@ -1,0 +1,53 @@
+0. pickle的实质是什么？
+
+是内置模块，用于存储数据的算法
+
+1. 使用pickle的什么方法存储数据？
+
+test = [1,2,3]
+file = open('test.pkl','wb')
+pickle.dump(test , file)
+file.close()
+
+3. 使用pickle能不能保存为”*.txt”类型的文件？
+
+可以的，无论存储，哈是读取，都可以正常工作
+
+
+0. 编写一个程序，这次要求使用pickle将文件（  record.txt (1.1 KB, 下载次数: 3349) ）里的对话按照以下要求腌制成不同文件（没错，是第29讲的内容小改，考考你自己能写出来吗？）：
+小甲鱼的对话单独保存为boy_*.txt的文件（去掉“小甲鱼:”）
+小客服的对话单独保存为girl_*.txt的文件（去掉“小客服:”）
+文件中总共有三段对话，分别保存为boy_1.txt, girl_1.txt，boy_2.txt, girl_2.txt, boy_3.txt, gril_3.txt共6个文件（提示：文件中不同的对话间已经使用“==========”分割）
+
+import os
+import pickle
+
+def chatCategory( chatfile ):
+    n = 1
+    boy = open('boy_%s.txt' % n,'wb+')
+    gir = open('gir_%s.txt' % n, 'wb+')
+    chatfile.seek(0, 0) # 设置指针为开头,保证迭代完整性
+    for chatline in chatfile:
+        if chatline.rfind('=') < 0: # 没有分割线进行迭代语句处理
+            list = chatline.split(':') # 使用split(":")来分割被迭代出的字符串
+            if len(list) == 2: # 真正的对话处理
+                if list[0] == '小甲鱼':
+                    pickle.dump( list[1] , boy )
+                elif list[0] == '小客服':
+                    pickle.dump( list[1] , gir )
+            elif len(list) == 1: # 空格,什么的一起写入
+                pickle.dump( list[0] , boy )
+                pickle.dump( list[0] , gir )
+        else: # 如果有分割线创建新的文件
+            boy.close()
+            gir.close()
+            n+=1
+            boy = open('boy_%s.txt' % n, 'wb+')
+            gir = open('gir_%s.txt' % n, 'wb+')
+    boy.close()
+    gir.close()
+
+if __name__ == "__main__":
+    chat_file = open('record.txt','at+')
+    chatCategory(chat_file)
+    chat_file.close()

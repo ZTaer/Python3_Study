@@ -1,0 +1,119 @@
+0. 我们使用什么方法来处理程序中出现的异常？
+第一种：断言 assert 条件
+第二种:	
+	try:
+		pass
+	except 指定错误 :
+		pass
+	finally:
+		pass
+第三种:
+	with....else...
+	如果with语句完整执行，那么else则会被执行
+第四种:
+	如果 try被完整执行那么，执行else
+	try:
+		pass
+	except:
+		pass
+	else:
+		pass
+		
+1. 一个 try 语句可以和多个 except 语句搭配吗？为什么？
+可以，因为except可以指定具体错误而被执行 
+try:
+	pass
+except SyntaxError:
+	pass
+except IndentationError:
+	pass
+
+2. 你知道如何统一处理多类异常吗？
+try:
+	pass
+except:
+	pass
+
+3. except 后边如果不带任何异常类，Python 会捕获所有（try 语句块内）的异常并统一处理，但小甲鱼却不建议这么做，你知道为什么吗？
+因为在try中可能出现多种错误,使用except无法获取验证具体错误信息
+
+
+4. 如果异常发生在成功打开文件后，Python 跳到 except 语句执行，并没有执行关闭文件的命令（用户写入文件的数据就可能没有保存起来），因此我们需要确保无论如何（就算出了异常退出）文件也要被关闭，我们应该怎么做呢？}u
+try:
+	with open('e://1.text','rt+') as file:
+		for i in file:
+			print(i)
+except:
+	print('错误')
+	
+5. 请恢复以下代码中马赛克挡住的内容，使得程序执行后可以按要求输出。1
+
+
+if __name__=="__main__":
+    try:
+        for each1 in range(3):
+            for each2 in range(3):
+                if each1 == 2:
+                    raise KeyboardInterrupt
+                print(each1,each2)
+    except KeyboardInterrupt :
+        print('退出')
+
+0. 还记得我们第一个小游戏吗？只要用户输入非整型数据，程序立刻就会蹦出不和谐的异常信息然后崩溃。请使用刚学的异常处理方法修改以下程序，提高用户体验。.j7Av`@lw
+猜数字小游戏：版
+
+#/usr/bin/python3
+#-*- coding:utf-8 -*-
+import random
+
+def intnum( num ):
+    while True:
+        try:
+            num = int(num)
+            break
+        except:
+            num = input("请输入整数类型数字: ")
+    return num
+    
+
+if __name__=="__main__":
+    secret = random.randint(1,10)
+    print('------------------我爱鱼C工作室------------------')
+    
+    temp = input("不妨猜一下小甲鱼现在心里想的是哪个数字：")
+    guess = intnum(temp)
+    
+    while guess != secret:
+        temp = input("哎呀，猜错了，请重新输入吧：")
+        guess = intnum(temp)
+        
+        if guess == secret:
+            print("我草，你是小甲鱼心里的蛔虫吗？！")
+            print("哼，猜中了也没有奖励！")
+        else:
+            if guess > secret:
+                print("哥，大了大了~~~")
+            else:
+                print("嘿，小了，小了~~~")
+    print("游戏结束，不玩啦^_^")
+
+2. 尝试一个新的函数 int_input()，当用户输入整数的时候正常返回，否则提示出错并要求重新输入。%
+
+def int_input( num ): # 转换成整数类型数字
+    while True:
+        try:
+            num = int(num)
+            break
+        except:
+            num = input("请输入整数类型数字: ")
+    return num
+3 把文件关闭放在 finally 语句块中执行还是会出现问题，像下边这个代码，当前文件夹中并不存在"My_File.txt"这个文件，那么程序执行起来会发生什么事情呢？你有办法解决这个问题吗？
+try:
+        with open('My_File.txt') as file: # 用with 打开文件可以自动关闭文件
+            print(file.read())
+    except FileNotFoundError as x:
+        print('错误FileNotFoundError: ' + str(x))
+
+
+
+
