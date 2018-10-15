@@ -26,14 +26,13 @@ import os
 def sysif( syssave=[] ):
     result = []
     result.extend( syssave )
-    if os.name == 'nt':
-        sysList = ['d:','e:','f:','g:','h:','i:','j:','k:']
-        for each in sysList:
-            try:
-                os.listdir(each)
-                result.append(each+os.sep)
-            except:
-                continue
+    sysList = ['d:', 'e:', 'f:', 'g:', 'h:', 'i:', 'j:', 'k:']
+    for each in sysList:
+        try:
+            os.listdir(each)
+            result.append(each+os.sep)
+        except:
+            continue
 
     result = set(result)
     result = list(result)
@@ -45,8 +44,7 @@ def findDirs( disklist='' , dirsname=[] , filesname=[] ):
         for each1 in files:
             result.append(road) if each1 in filesname else False
         for each2 in dirs:
-            result.append(road+each2) if each2 in dirsname else False
-
+            result.append(road+os.sep+each2) if each2 in dirsname else False
     result = set(result)
     result = list(result)
     return result
@@ -72,6 +70,3 @@ if __name__ =="__main__":
         roadCPU.extend( findDirs(disks , dirname , filesname) )
     for end in roadCPU:
         deleteDirs(end)
-
-
-
