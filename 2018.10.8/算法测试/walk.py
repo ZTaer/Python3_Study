@@ -11,5 +11,4 @@ for road, dirs, files in os.walk(road, topdown=False):
     #   显示所有文件( 带路径位置 )
     for i in files:
         print( road+os.sep+i )
-    
-    
+
