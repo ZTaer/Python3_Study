@@ -26,7 +26,39 @@ msdict = {
     "A":".-",
     "B":"-...",
     "C":"-.-.",
-    "D":"-.."
+    "D":"-..",
+    "E":".",
+    "F":"..-.",
+    "G":"--.",
+    "H":"....",
+    "I":"..",
+    "J":".---",
+    "K":"-.-",
+    "L":".-..",
+    "M":"--",
+    "N":"-.",
+    "O":"---",
+    "P":".--.",
+    "Q":"--.-",
+    "R":".-.",
+    "S":"...",
+    "T":"-",
+    "U":"..-",
+    "V":"...-",
+    "W":".--",
+    "X":"-..-",
+    "Y":"-.--",
+    "Z":"--..",
+    "1":".----",
+    "2":"..---",
+    "3":"...--",
+    "4":"....-",
+    "5":".....",
+    "6":"-....",
+    "7":"--...",
+    "8":"---..",
+    "9":"----.",
+    "0":"-----"
 }
 def msToaz(road): # 摩斯密码转字母数字
     file = open("%s" % road ,'rt+',encoding='utf-8')
@@ -37,9 +69,10 @@ def msToaz(road): # 摩斯密码转字母数字
         if "-" in ms or "." in ms: # 如果迭代的列表元素含"-"or"."在进行加工,否则直接加入结果列表
             for key , values in msdict.items(): # items()字典转元祖容易读取,for能迭代1个元素列表中的2个元素
                 if ms == values:
-                    result.append(key)
+                    result.append(key) muiop
         else:
             result.append(ms)
+            result.append(" ")
     file.close()
     return  result
 
@@ -49,6 +82,7 @@ def azToms(road):
     fileMsList = list(file.read().upper()) # upper()小写字母全部变大写,字符串内容转列表元素(其实不转列表直接迭代字符串也是可以的,但是过段时间长忘记这件事情,出于容易理解转换列表把)
     result = []
     for az in fileMsList:
+
         result.append(msdict[az]) if az.isalnum() else result.append(az) # msdict[az]字典键值读取的内容直接加结果列表
         result.append(" ") # 每一个翻译结果加一个空格,在写入文件后更加人性化
     file.close()
@@ -59,7 +93,7 @@ def wq( result ): # 交互式存储文件
     if siveName == 'Y':
         fileName = input("保存文件名为(.txt): ")
         file = open('%s.txt' % fileName , 'wt+')
-        file.writelines(result)
+        file.writelines(result) # writelines()可以将列表内容写入文件
         file.close()
         print("保存成功 - 位置: 执行程序当前目录\n")
     else:
@@ -84,7 +118,7 @@ if __name__ == "__main__":
             wq(result2)
         elif choose == 'Q':
             print("程序结束,谢谢使用!")
-            time.sleep(2)
+            time.sleep(1)
             power = False
         else:
             print("输入错误,请重新输入!")
